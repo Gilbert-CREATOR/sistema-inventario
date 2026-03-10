@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos - Sistema Inventario</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-warehouse"></i>
+                    <span>Sistema Inventario</span>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="catalog.html" class="nav-link active">Catálogo</a>
+                    </li>
+                    <li class="nav-item" id="login-nav-item">
+                        <a href="login.html" class="nav-link">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item" id="user-nav-item" style="display: none;">
+                        <div class="user-menu">
+                            <span class="user-name" id="user-name-display"></span>
+                            <div class="user-dropdown">
+                                <a href="#" id="logout-btn">Cerrar Sesión</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="catalog-header">
+            <div class="container">
+                <div class="catalog-hero">
+                    <h1 class="catalog-title">Catálogo de Productos</h1>
+                    <p class="catalog-subtitle">Descubre nuestra amplia selección de productos disponibles</p>
+                    
+                    <div class="search-section">
+                        <div class="search-container">
+                            <div class="search-box">
+                                <input type="text" id="catalog-search" placeholder="Buscar productos...">
+                                <button class="search-btn" id="search-btn">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <button class="btn btn-secondary" id="advanced-search-btn">
+                                <i class="fas fa-filter"></i>
+                                Filtros
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="catalog-content">
+            <div class="container">
+                <div class="catalog-layout">
+                    <!-- Sidebar de filtros -->
+                    <aside class="catalog-sidebar" id="catalog-sidebar">
+                        <div class="filter-section">
+                            <h3 class="filter-title">Categorías</h3>
+                            <div class="filter-options" id="category-filters">
+                                <!-- Las categorías se cargarán dinámicamente -->
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3 class="filter-title">Rango de Precios</h3>
+                            <div class="price-range">
+                                <div class="price-inputs">
+                                    <input type="number" id="min-price" placeholder="Mínimo" min="0">
+                                    <span>-</span>
+                                    <input type="number" id="max-price" placeholder="Máximo" min="0">
+                                </div>
+                                <button class="btn btn-sm btn-secondary" id="apply-price-filter">
+                                    Aplicar
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3 class="filter-title">Ordenar por</h3>
+                            <select id="sort-options" class="sort-select">
+                                <option value="name">Nombre (A-Z)</option>
+                                <option value="name-desc">Nombre (Z-A)</option>
+                                <option value="price">Precio (Menor a Mayor)</option>
+                                <option value="price-desc">Precio (Mayor a Menor)</option>
+                                <option value="rating">Mejor Calificados</option>
+                                <option value="stock">Más Disponibles</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-outline btn-full" id="clear-filters">
+                            <i class="fas fa-times"></i>
+                            Limpiar Filtros
+                        </button>
+                    </aside>
+
+                    <!-- Grid de productos -->
+                    <div class="catalog-main">
+                        <div class="catalog-info">
+                            <div class="results-count">
+                                <span id="results-count">Cargando...</span> productos encontrados
+                            </div>
+                            <div class="view-options">
+                                <button class="view-btn active" data-view="grid">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button class="view-btn" data-view="list">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="products-grid" id="products-grid">
+                            <!-- Los productos se cargarán dinámicamente -->
+                        </div>
+
+                        <!-- Paginación -->
+                        <div class="pagination" id="pagination">
+                            <!-- La paginación se cargará dinámicamente -->
+                        </div>
+
+                        <!-- Estado vacío -->
+                        <div class="empty-state" id="empty-state" style="display: none;">
+                            <div class="empty-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3>No se encontraron productos</h3>
+                            <p>Intenta ajustar los filtros o términos de búsqueda</p>
+                            <button class="btn btn-primary" id="reset-search">
+                                <i class="fas fa-redo"></i>
+                                Restablecer Búsqueda
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de detalles del producto -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2 id="modal-product-title">Detalles del Producto</h2>
+                <button class="modal-close" id="close-product-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="product-modal-body">
+                <!-- Los detalles del producto se cargarán dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sistema Inventario</h3>
+                    <p>Tu plataforma confiable para gestión de productos</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces</h4>
+                    <ul>
+                        <li><a href="catalog.html">Catálogo</a></li>
+                        <li><a href="login.html">Iniciar Sesión</a></li>
+                        <li><a href="register.html">Registrarse</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>support@sistemainventario.com</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sistema Inventario. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/catalog.js"></script>
+</body>
+</html>

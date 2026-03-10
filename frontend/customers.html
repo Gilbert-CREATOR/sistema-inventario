@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Clientes - Sistema Inventario</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-warehouse"></i>
+                    <span>Sistema Inventario</span>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="customers.html" class="nav-link active">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventory.html" class="nav-link">Inventario</a>
+                    </li>
+                </ul>
+                <div class="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Gestión de Clientes</h1>
+                <p class="page-subtitle">Administra la información de tus clientes y su historial de crédito</p>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container">
+                <div class="actions-bar">
+                    <button class="btn btn-primary" id="add-customer-btn">
+                        <i class="fas fa-plus"></i>
+                        Nuevo Cliente
+                    </button>
+                    <div class="search-box">
+                        <input type="text" id="search-customers" placeholder="Buscar clientes...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+
+                <div class="customers-grid" id="customers-grid">
+                    <!-- Los clientes se cargarán dinámicamente aquí -->
+                </div>
+
+                <div class="empty-state" id="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>No hay clientes registrados</h3>
+                    <p>Comienza agregando tu primer cliente para gestionar tu negocio</p>
+                    <button class="btn btn-primary" onclick="openCustomerModal()">
+                        <i class="fas fa-plus"></i>
+                        Agregar Primer Cliente
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para agregar/editar clientes -->
+    <div class="modal" id="customer-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Nuevo Cliente</h2>
+                <button class="modal-close" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="customer-form">
+                <div class="form-group">
+                    <label for="customer-name">Nombre Completo</label>
+                    <input type="text" id="customer-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-email">Correo Electrónico</label>
+                    <input type="email" id="customer-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-credit">Crédito Inicial</label>
+                    <input type="number" id="customer-credit" step="0.01" min="0" value="0">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cliente</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para gestionar crédito -->
+    <div class="modal" id="credit-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Gestionar Crédito</h2>
+                <button class="modal-close" id="close-credit-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="credit-form">
+                <div class="customer-info">
+                    <p><strong>Cliente:</strong> <span id="credit-customer-name"></span></p>
+                    <p><strong>Crédito Actual:</strong> $<span id="current-credit"></span></p>
+                </div>
+                <div class="form-group">
+                    <label for="credit-amount">Monto a Agregar/Quitar</label>
+                    <input type="number" id="credit-amount" step="0.01" required>
+                    <small>Usa números positivos para agregar, negativos para quitar</small>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-credit-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar Crédito</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sistema Inventario</h3>
+                    <p>Una solución completa para la gestión de tu negocio</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="inventory.html">Inventario</a></li>
+                        <li><a href="customers.html">Clientes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>support@sistemainventario.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sistema Inventario. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/customers.js"></script>
+</body>
+</html>

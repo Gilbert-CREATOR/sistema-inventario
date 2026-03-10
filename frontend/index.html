@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Inventario - Inicio</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-warehouse"></i>
+                    <span>Sistema Inventario</span>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link active">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="customers.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventory.html" class="nav-link">Inventario</a>
+                    </li>
+                </ul>
+                <div class="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Sistema de Gestión de Inventario</h1>
+                <p class="hero-subtitle">Controla tu inventario y gestiona clientes de manera eficiente</p>
+                <div class="hero-buttons">
+                    <a href="inventory.html" class="btn btn-primary">
+                        <i class="fas fa-box"></i>
+                        Ver Inventario
+                    </a>
+                    <a href="customers.html" class="btn btn-secondary">
+                        <i class="fas fa-users"></i>
+                        Gestionar Clientes
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Características Principales</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Control Total</h3>
+                        <p class="feature-description">Monitorea tu inventario en tiempo real y toma decisiones informadas</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <h3 class="feature-title">Gestión de Clientes</h3>
+                        <p class="feature-description">Administra información de clientes y su historial de crédito</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Sincronización</h3>
+                        <p class="feature-description">Mantén tus datos actualizados y sincronizados en todo momento</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Seguridad</h3>
+                        <p class="feature-description">Protege tu información con medidas de seguridad avanzadas</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-products">0</div>
+                        <div class="stat-label">Productos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-customers">0</div>
+                        <div class="stat-label">Clientes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-orders">0</div>
+                        <div class="stat-label">Órdenes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-revenue">$0</div>
+                        <div class="stat-label">Ingresos</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sistema Inventario</h3>
+                    <p>Una solución completa para la gestión de tu negocio</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="inventory.html">Inventario</a></li>
+                        <li><a href="customers.html">Clientes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>support@sistemainventario.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sistema Inventario. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

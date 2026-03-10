@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema Inventario</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-warehouse"></i>
+                    <span>Sistema Inventario</span>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                    </li>
+                    <li class="nav-item" id="catalog-nav-item">
+                        <a href="catalog.html" class="nav-link">Catálogo</a>
+                    </li>
+                    <li class="nav-item" id="customers-nav-item" style="display: none;">
+                        <a href="customers.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item" id="inventory-nav-item" style="display: none;">
+                        <a href="inventory.html" class="nav-link">Inventario</a>
+                    </li>
+                    <li class="nav-item" id="admin-nav-item" style="display: none;">
+                        <a href="admin.html" class="nav-link">Administración</a>
+                    </li>
+                    <li class="nav-item" id="user-nav-item">
+                        <div class="user-menu">
+                            <span class="user-name" id="user-name-display"></span>
+                            <div class="user-dropdown">
+                                <a href="#" id="profile-btn">Mi Perfil</a>
+                                <a href="#" id="settings-btn">Configuración</a>
+                                <a href="#" id="logout-btn">Cerrar Sesión</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="dashboard-header">
+            <div class="container">
+                <div class="dashboard-welcome">
+                    <h1 class="dashboard-title">Bienvenido, <span id="user-welcome-name"></span></h1>
+                    <p class="dashboard-subtitle">Panel de control - <span id="user-role-display"></span></p>
+                </div>
+                <div class="dashboard-date">
+                    <i class="fas fa-calendar"></i>
+                    <span id="current-date"></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard-content">
+            <div class="container">
+                <!-- Estadísticas principales -->
+                <div class="dashboard-stats" id="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="total-products">0</div>
+                            <div class="stat-label">Productos</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="total-clients">0</div>
+                            <div class="stat-label">Clientes</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="low-stock-items">0</div>
+                            <div class="stat-label">Stock Bajo</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="total-value">$0</div>
+                            <div class="stat-label">Valor Total</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acciones rápidas -->
+                <div class="dashboard-actions">
+                    <h2 class="section-title">Acciones Rápidas</h2>
+                    <div class="actions-grid" id="actions-grid">
+                        <!-- Las acciones se cargarán según el rol -->
+                    </div>
+                </div>
+
+                <!-- Actividad reciente -->
+                <div class="dashboard-activity">
+                    <h2 class="section-title">Actividad Reciente</h2>
+                    <div class="activity-list" id="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p class="activity-text">Cargando actividad reciente...</p>
+                                <span class="activity-time">Esperando datos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos y reportes (solo para admin y superadmin) -->
+                <div class="dashboard-reports" id="dashboard-reports" style="display: none;">
+                    <h2 class="section-title">Reportes y Estadísticas</h2>
+                    <div class="reports-grid">
+                        <div class="report-card">
+                            <h3>Tendencia de Ventas</h3>
+                            <div class="chart-placeholder">
+                                <i class="fas fa-chart-line"></i>
+                                <p>Gráfico de tendencia de ventas</p>
+                            </div>
+                        </div>
+                        <div class="report-card">
+                            <h3>Productos Más Vendidos</h3>
+                            <div class="chart-placeholder">
+                                <i class="fas fa-chart-bar"></i>
+                                <p>Top productos del mes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sistema Inventario</h3>
+                    <p>Tu plataforma confiable para gestión de inventario</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="catalog.html">Catálogo</a></li>
+                        <li><a href="customers.html">Clientes</a></li>
+                        <li><a href="inventory.html">Inventario</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <p>support@sistemainventario.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sistema Inventario. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

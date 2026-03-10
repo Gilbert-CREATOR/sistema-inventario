@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrador - Sistema Inventario</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-warehouse"></i>
+                    <span>Sistema Inventario</span>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="admin.html" class="nav-link active">Administración</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="customers.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventory.html" class="nav-link">Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="catalog.html" class="nav-link">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="user-menu">
+                            <span class="user-name" id="user-name-display"></span>
+                            <div class="user-dropdown">
+                                <a href="#" id="profile-btn">Mi Perfil</a>
+                                <a href="#" id="settings-btn">Configuración</a>
+                                <a href="#" id="logout-btn">Cerrar Sesión</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="admin-header">
+            <div class="container">
+                <div class="admin-welcome">
+                    <h1 class="admin-title">Panel de Administración</h1>
+                    <p class="admin-subtitle">Gestión completa del sistema</p>
+                </div>
+                <div class="admin-breadcrumb">
+                    <span class="breadcrumb-item">Inicio</span>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-item active">Administración</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="admin-content">
+            <div class="container">
+                <!-- Estadísticas del sistema -->
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="total-users">0</div>
+                            <div class="stat-label">Usuarios Totales</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="active-users">0</div>
+                            <div class="stat-label">Usuarios Activos</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="admin-users">0</div>
+                            <div class="stat-label">Administradores</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="customer-users">0</div>
+                            <div class="stat-label">Clientes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección de gestión de usuarios -->
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Gestión de Usuarios</h2>
+                        <button class="btn btn-primary" id="add-user-btn">
+                            <i class="fas fa-user-plus"></i>
+                            Nuevo Usuario
+                        </button>
+                    </div>
+
+                    <div class="admin-filters">
+                        <div class="filter-group">
+                            <select id="role-filter" class="filter-select">
+                                <option value="">Todos los roles</option>
+                                <option value="superadmin">Super Admin</option>
+                                <option value="admin">Administrador</option>
+                                <option value="employee">Empleado</option>
+                                <option value="customer">Cliente</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <select id="status-filter" class="filter-select">
+                                <option value="">Todos los estados</option>
+                                <option value="active">Activos</option>
+                                <option value="inactive">Inactivos</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <div class="search-box">
+                                <input type="text" id="user-search" placeholder="Buscar usuarios...">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="users-table-container">
+                        <table class="users-table" id="users-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Usuario</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Rol</th>
+                                    <th>Estado</th>
+                                    <th>Último Login</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-tbody">
+                                <!-- Los usuarios se cargarán dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="empty-state" id="users-empty-state" style="display: none;">
+                        <div class="empty-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>No se encontraron usuarios</h3>
+                        <p>Intenta ajustar los filtros de búsqueda</p>
+                    </div>
+                </div>
+
+                <!-- Configuración del sistema -->
+                <div class="admin-section">
+                    <h2 class="section-title">Configuración del Sistema</h2>
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <div class="config-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <h3>Configuración General</h3>
+                            <p>Ajustes básicos del sistema</p>
+                            <button class="btn btn-secondary" onclick="openConfigModal('general')">
+                                <i class="fas fa-edit"></i>
+                                Configurar
+                            </button>
+                        </div>
+                        <div class="config-card">
+                            <div class="config-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Seguridad</h3>
+                            <p>Políticas de seguridad y acceso</p>
+                            <button class="btn btn-secondary" onclick="openConfigModal('security')">
+                                <i class="fas fa-edit"></i>
+                                Configurar
+                            </button>
+                        </div>
+                        <div class="config-card">
+                            <div class="config-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <h3>Notificaciones</h3>
+                            <p>Configuración de alertas y notificaciones</p>
+                            <button class="btn btn-secondary" onclick="openConfigModal('notifications')">
+                                <i class="fas fa-edit"></i>
+                                Configurar
+                            </button>
+                        </div>
+                        <div class="config-card">
+                            <div class="config-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h3>Base de Datos</h3>
+                            <p>Respaldo y mantenimiento de datos</p>
+                            <button class="btn btn-secondary" onclick="openConfigModal('database')">
+                                <i class="fas fa-edit"></i>
+                                Configurar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logs del sistema -->
+                <div class="admin-section">
+                    <h2 class="section-title">Logs del Sistema</h2>
+                    <div class="logs-container">
+                        <div class="logs-filters">
+                            <select id="log-level" class="filter-select">
+                                <option value="">Todos los niveles</option>
+                                <option value="error">Errores</option>
+                                <option value="warning">Advertencias</option>
+                                <option value="info">Información</option>
+                            </select>
+                            <input type="date" id="log-date" class="filter-input">
+                            <button class="btn btn-secondary" id="refresh-logs">
+                                <i class="fas fa-sync"></i>
+                                Actualizar
+                            </button>
+                        </div>
+                        <div class="logs-list" id="logs-list">
+                            <div class="log-item">
+                                <div class="log-time">2024-01-01 12:00:00</div>
+                                <div class="log-level info">INFO</div>
+                                <div class="log-message">Sistema iniciado correctamente</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para agregar/editar usuario -->
+    <div class="modal" id="user-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Nuevo Usuario</h2>
+                <button class="modal-close" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="user-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="user-username">Usuario</label>
+                        <input type="text" id="user-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-email">Email</label>
+                        <input type="email" id="user-email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="user-name">Nombre Completo</label>
+                        <input type="text" id="user-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-role">Rol</label>
+                        <select id="user-role" required>
+                            <option value="customer">Cliente</option>
+                            <option value="employee">Empleado</option>
+                            <option value="admin">Administrador</option>
+                            <option value="superadmin">Super Admin</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="user-password">Contraseña</label>
+                        <input type="password" id="user-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-phone">Teléfono</label>
+                        <input type="tel" id="user-phone">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="user-address">Dirección</label>
+                    <input type="text" id="user-address">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sistema Inventario</h3>
+                    <p>Plataforma completa de gestión empresarial</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="customers.html">Clientes</a></li>
+                        <li><a href="inventory.html">Inventario</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <p>admin@sistemainventario.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sistema Inventario. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Inventario - Sistema Inventario</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-warehouse"></i>
+                    <span>Sistema Inventario</span>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="customers.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventory.html" class="nav-link active">Inventario</a>
+                    </li>
+                </ul>
+                <div class="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Gestión de Inventario</h1>
+                <p class="page-subtitle">Controla tu stock, agrega productos y monitorea tus niveles de inventario</p>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container">
+                <div class="inventory-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="total-items">0</div>
+                            <div class="stat-label">Total Productos</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="low-stock">0</div>
+                            <div class="stat-label">Stock Bajo</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="total-value">$0</div>
+                            <div class="stat-label">Valor Total</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actions-bar">
+                    <button class="btn btn-primary" id="add-item-btn">
+                        <i class="fas fa-plus"></i>
+                        Nuevo Producto
+                    </button>
+                    <div class="filter-buttons">
+                        <button class="btn btn-secondary active" data-filter="all">Todos</button>
+                        <button class="btn btn-secondary" data-filter="low-stock">Stock Bajo</button>
+                        <button class="btn btn-secondary" data-filter="out-of-stock">Sin Stock</button>
+                    </div>
+                    <div class="search-box">
+                        <input type="text" id="search-items" placeholder="Buscar productos...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+
+                <div class="inventory-table-container">
+                    <table class="inventory-table" id="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Stock</th>
+                                <th>Precio Unitario</th>
+                                <th>Valor Total</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-tbody">
+                            <!-- Los productos se cargarán dinámicamente aquí -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="empty-state" id="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h3>No hay productos en el inventario</h3>
+                    <p>Comienza agregando productos para gestionar tu inventario</p>
+                    <button class="btn btn-primary" onclick="openItemModal()">
+                        <i class="fas fa-plus"></i>
+                        Agregar Primer Producto
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para agregar/editar productos -->
+    <div class="modal" id="item-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Nuevo Producto</h2>
+                <button class="modal-close" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="item-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="item-name">Nombre del Producto</label>
+                        <input type="text" id="item-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-category">Categoría</label>
+                        <select id="item-category" required>
+                            <option value="">Seleccionar categoría</option>
+                            <option value="electrónica">Electrónica</option>
+                            <option value="ropa">Ropa</option>
+                            <option value="alimentos">Alimentos</option>
+                            <option value="muebles">Muebles</option>
+                            <option value="herramientas">Herramientas</option>
+                            <option value="otros">Otros</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="item-stock">Stock Inicial</label>
+                        <input type="number" id="item-stock" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-price">Precio Unitario</label>
+                        <input type="number" id="item-price" step="0.01" min="0" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="item-min-stock">Stock Mínimo</label>
+                        <input type="number" id="item-min-stock" min="0" value="5">
+                        <small>Nivel mínimo para alertas de stock bajo</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-sku">SKU (Opcional)</label>
+                        <input type="text" id="item-sku" placeholder="Código único del producto">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="item-description">Descripción</label>
+                    <textarea id="item-description" rows="3" placeholder="Descripción detallada del producto"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para ajustar stock -->
+    <div class="modal" id="stock-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ajustar Stock</h2>
+                <button class="modal-close" id="close-stock-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="stock-form">
+                <div class="item-info">
+                    <p><strong>Producto:</strong> <span id="stock-item-name"></span></p>
+                    <p><strong>Stock Actual:</strong> <span id="current-stock"></span></p>
+                </div>
+                <div class="form-group">
+                    <label for="stock-adjustment">Ajuste de Stock</label>
+                    <input type="number" id="stock-adjustment" required>
+                    <small>Usa números positivos para agregar, negativos para quitar</small>
+                </div>
+                <div class="form-group">
+                    <label for="stock-reason">Motivo del Ajuste</label>
+                    <select id="stock-reason" required>
+                        <option value="">Seleccionar motivo</option>
+                        <option value="compra">Compra/Entrada</option>
+                        <option value="venta">Venta/Salida</option>
+                        <option value="devolucion">Devolución</option>
+                        <option value="merma">Merma/Pérdida</option>
+                        <option value="ajuste">Ajuste de Inventario</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-stock-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar Stock</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sistema Inventario</h3>
+                    <p>Una solución completa para la gestión de tu negocio</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="inventory.html">Inventario</a></li>
+                        <li><a href="customers.html">Clientes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>support@sistemainventario.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sistema Inventario. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/inventory.js"></script>
+</body>
+</html>

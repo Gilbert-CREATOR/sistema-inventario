@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Panel - Sistema Inventario</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-warehouse"></i>
+                    <span>Sistema Inventario</span>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="customer.html" class="nav-link active">Mi Panel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="catalog.html" class="nav-link">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="orders-nav">Mis Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="user-menu">
+                            <span class="user-name" id="user-name-display"></span>
+                            <div class="user-dropdown">
+                                <a href="#" id="profile-btn">Mi Perfil</a>
+                                <a href="#" id="settings-btn">Configuración</a>
+                                <a href="#" id="logout-btn">Cerrar Sesión</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="customer-header">
+            <div class="container">
+                <div class="customer-welcome">
+                    <h1 class="customer-title">Bienvenido, <span id="customer-welcome-name"></span></h1>
+                    <p class="customer-subtitle">Tu panel personal de cliente</p>
+                </div>
+                <div class="customer-credit-info">
+                    <div class="credit-display">
+                        <i class="fas fa-credit-card"></i>
+                        <div class="credit-details">
+                            <span class="credit-label">Crédito Disponible</span>
+                            <span class="credit-amount" id="customer-credit">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="customer-content">
+            <div class="container">
+                <!-- Resumen de cuenta -->
+                <div class="customer-summary">
+                    <h2 class="section-title">Resumen de Cuenta</h2>
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="summary-content">
+                                <div class="summary-number" id="total-orders">0</div>
+                                <div class="summary-label">Pedidos Realizados</div>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="summary-content">
+                                <div class="summary-number" id="pending-orders">0</div>
+                                <div class="summary-label">Pedidos Pendientes</div>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="summary-content">
+                                <div class="summary-number" id="favorite-products">0</div>
+                                <div class="summary-label">Productos Favoritos</div>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="summary-content">
+                                <div class="summary-number" id="total-spent">$0.00</div>
+                                <div class="summary-label">Total Gastado</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pedidos recientes -->
+                <div class="customer-orders">
+                    <div class="section-header">
+                        <h2 class="section-title">Pedidos Recientes</h2>
+                        <a href="#" class="btn btn-secondary" id="view-all-orders">
+                            <i class="fas fa-list"></i>
+                            Ver Todos
+                        </a>
+                    </div>
+                    <div class="orders-list" id="recent-orders">
+                        <div class="order-item">
+                            <div class="order-header">
+                                <div class="order-info">
+                                    <span class="order-number">#ORD-001</span>
+                                    <span class="order-date">15 Enero 2024</span>
+                                </div>
+                                <div class="order-status">
+                                    <span class="status-badge processing">En Proceso</span>
+                                </div>
+                            </div>
+                            <div class="order-content">
+                                <div class="order-items">
+                                    <div class="order-item-preview">
+                                        <img src="https://picsum.photos/seed/product1/50/50.jpg" alt="Producto">
+                                        <span class="item-count">3 productos</span>
+                                    </div>
+                                </div>
+                                <div class="order-total">
+                                    <span class="total-label">Total:</span>
+                                    <span class="total-amount">$1,250.00</span>
+                                </div>
+                            </div>
+                            <div class="order-actions">
+                                <button class="btn btn-sm btn-outline">Ver Detalles</button>
+                                <button class="btn btn-sm btn-primary">Seguir Pedido</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="empty-state" id="orders-empty-state" style="display: none;">
+                        <div class="empty-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>No tienes pedidos aún</h3>
+                        <p>Explora nuestro catálogo y realiza tu primer pedido</p>
+                        <a href="catalog.html" class="btn btn-primary">
+                            <i class="fas fa-shopping-bag"></i>
+                            Ir al Catálogo
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Productos recomendados -->
+                <div class="customer-recommendations">
+                    <h2 class="section-title">Recomendados para Ti</h2>
+                    <div class="products-grid" id="recommended-products">
+                        <!-- Los productos se cargarán dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Activity timeline -->
+                <div class="customer-activity">
+                    <h2 class="section-title">Tu Actividad</h2>
+                    <div class="activity-timeline" id="customer-activity-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Cuenta creada</h4>
+                                <p>Te registraste en nuestro sistema</p>
+                                <span class="timeline-time">Hace 2 días</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Producto agregado a favoritos</h4>
+                                <p>Agregaste "Laptop Dell" a tus favoritos</p>
+                                <span class="timeline-time">Ayer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carrito de compras -->
+                <div class="customer-cart">
+                    <div class="section-header">
+                        <h2 class="section-title">Mi Carrito</h2>
+                        <div class="cart-summary">
+                            <span id="cart-count">0</span> productos - 
+                            <span id="cart-total">$0.00</span>
+                        </div>
+                    </div>
+                    <div class="cart-items" id="cart-items">
+                        <div class="empty-cart">
+                            <div class="empty-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <h3>Tu carrito está vacío</h3>
+                            <p>Agrega productos desde el catálogo</p>
+                            <a href="catalog.html" class="btn btn-primary">
+                                <i class="fas fa-shopping-bag"></i>
+                                Ir al Catálogo
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cart-actions" id="cart-actions" style="display: none;">
+                        <button class="btn btn-secondary" id="clear-cart">
+                            <i class="fas fa-trash"></i>
+                            Vaciar Carrito
+                        </button>
+                        <button class="btn btn-primary" id="checkout">
+                            <i class="fas fa-credit-card"></i>
+                            Proceder al Pago
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de detalles del pedido -->
+    <div class="modal" id="order-details-modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Detalles del Pedido</h2>
+                <button class="modal-close" id="close-order-details">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="order-details-body">
+                <!-- Los detalles del pedido se cargarán dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de perfil -->
+    <div class="modal" id="profile-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Mi Perfil</h2>
+                <button class="modal-close" id="close-profile">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="profile-form">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                        <button type="button" class="change-avatar">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    <div class="profile-info">
+                        <h3 id="profile-name"></h3>
+                        <p id="profile-email"></p>
+                        <span class="role-badge" id="profile-role">Cliente</span>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Información Personal</h3>
+                    <div class="form-group">
+                        <label for="profile-fullname">Nombre Completo</label>
+                        <input type="text" id="profile-fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-phone">Teléfono</label>
+                        <input type="tel" id="profile-phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-address">Dirección</label>
+                        <input type="text" id="profile-address">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Información de Cuenta</h3>
+                    <div class="form-group">
+                        <label for="profile-email-input">Email</label>
+                        <input type="email" id="profile-email-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-password">Nueva Contraseña</label>
+                        <input type="password" id="profile-password" placeholder="Dejar en blanco para mantener la actual">
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-confirm-password">Confirmar Contraseña</label>
+                        <input type="password" id="profile-confirm-password">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-profile">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sistema Inventario</h3>
+                    <p>Tu plataforma de compras confiable</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="catalog.html">Catálogo</a></li>
+                        <li><a href="#" id="orders-nav-footer">Mis Pedidos</a></li>
+                        <li><a href="#" id="profile-nav-footer">Mi Perfil</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte al Cliente</h4>
+                    <p>support@sistemainventario.com</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sistema Inventario. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/customer.js"></script>
+</body>
+</html>

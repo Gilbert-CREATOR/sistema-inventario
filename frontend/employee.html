@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Empleado - Sistema Inventario</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-warehouse"></i>
+                    <span>Sistema Inventario</span>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="employee.html" class="nav-link active">Mi Panel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="customers.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="inventory.html" class="nav-link">Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="catalog.html" class="nav-link">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="user-menu">
+                            <span class="user-name" id="user-name-display"></span>
+                            <div class="user-dropdown">
+                                <a href="#" id="profile-btn">Mi Perfil</a>
+                                <a href="#" id="settings-btn">Configuración</a>
+                                <a href="#" id="logout-btn">Cerrar Sesión</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="employee-header">
+            <div class="container">
+                <div class="employee-welcome">
+                    <h1 class="employee-title">Panel de Empleado</h1>
+                    <p class="employee-subtitle">Gestión de operaciones diarias</p>
+                </div>
+                <div class="employee-info">
+                    <div class="info-item">
+                        <i class="fas fa-user"></i>
+                        <span id="employee-name"></span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span id="current-time"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="employee-content">
+            <div class="container">
+                <!-- Resumen del día -->
+                <div class="employee-summary">
+                    <h2 class="section-title">Resumen del Día</h2>
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="summary-content">
+                                <div class="summary-number" id="daily-sales">0</div>
+                                <div class="summary-label">Ventas del Día</div>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="summary-content">
+                                <div class="summary-number" id="new-customers">0</div>
+                                <div class="summary-label">Nuevos Clientes</div>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="summary-content">
+                                <div class="summary-number" id="products-sold">0</div>
+                                <div class="summary-label">Productos Vendidos</div>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="summary-content">
+                                <div class="summary-number" id="daily-revenue">$0</div>
+                                <div class="summary-label">Ingresos del Día</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tareas pendientes -->
+                <div class="employee-tasks">
+                    <h2 class="section-title">Tareas Pendientes</h2>
+                    <div class="tasks-list" id="tasks-list">
+                        <div class="task-item urgent">
+                            <div class="task-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="task-content">
+                                <h4 class="task-title">Revisar stock bajo</h4>
+                                <p class="task-description">5 productos necesitan reabastecimiento urgente</p>
+                                <div class="task-meta">
+                                    <span class="task-priority urgent">Urgente</span>
+                                    <span class="task-time">Hace 2 horas</span>
+                                </div>
+                            </div>
+                            <div class="task-actions">
+                                <button class="btn btn-sm btn-primary">Revisar</button>
+                            </div>
+                        </div>
+                        <div class="task-item normal">
+                            <div class="task-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="task-content">
+                                <h4 class="task-title">Contactar clientes</h4>
+                                <p class="task-description">Seguimiento a 3 clientes con crédito pendiente</p>
+                                <div class="task-meta">
+                                    <span class="task-priority normal">Normal</span>
+                                    <span class="task-time">Hoy</span>
+                                </div>
+                            </div>
+                            <div class="task-actions">
+                                <button class="btn btn-sm btn-secondary">Contactar</button>
+                            </div>
+                        </div>
+                        <div class="task-item low">
+                            <div class="task-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div class="task-content">
+                                <h4 class="task-title">Actualizar inventario</h4>
+                                <p class="task-description">Registrar nuevas entradas de productos</p>
+                                <div class="task-meta">
+                                    <span class="task-priority low">Baja</span>
+                                    <span class="task-time">Mañana</span>
+                                </div>
+                            </div>
+                            <div class="task-actions">
+                                <button class="btn btn-sm btn-outline">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acciones rápidas -->
+                <div class="employee-actions">
+                    <h2 class="section-title">Acciones Rápidas</h2>
+                    <div class="quick-actions-grid">
+                        <a href="customers.html" class="action-card">
+                            <div class="action-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <h3>Nuevo Cliente</h3>
+                            <p>Registrar un nuevo cliente en el sistema</p>
+                        </a>
+                        <a href="inventory.html" class="action-card">
+                            <div class="action-icon">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            <h3>Gestionar Inventario</h3>
+                            <p>Agregar o ajustar productos del inventario</p>
+                        </a>
+                        <div class="action-card" onclick="openQuickSale()">
+                            <div class="action-icon">
+                                <i class="fas fa-cash-register"></i>
+                            </div>
+                            <h3>Venta Rápida</h3>
+                            <p>Registrar una venta directamente</p>
+                        </div>
+                        <div class="action-card" onclick="openStockAdjustment()">
+                            <div class="action-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <h3>Ajustar Stock</h3>
+                            <p>Realizar ajustes rápidos de inventario</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Productos con stock bajo -->
+                <div class="employee-alerts">
+                    <h2 class="section-title">Alertas de Inventario</h2>
+                    <div class="alerts-grid" id="low-stock-alerts">
+                        <!-- Las alertas se cargarán dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Actividad reciente -->
+                <div class="employee-activity">
+                    <h2 class="section-title">Mi Actividad Reciente</h2>
+                    <div class="activity-timeline" id="activity-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Cliente agregado</h4>
+                                <p>Registraste un nuevo cliente: Juan Pérez</p>
+                                <span class="timeline-time">Hace 30 minutos</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Stock actualizado</h4>
+                                <p>Ajustaste el stock del producto "Laptop Dell"</p>
+                                <span class="timeline-time">Hace 2 horas</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Crédito actualizado</h4>
+                                <p>Modificaste el crédito del cliente María García</p>
+                                <span class="timeline-time">Ayer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de venta rápida -->
+    <div class="modal" id="quick-sale-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Venta Rápida</h2>
+                <button class="modal-close" id="close-quick-sale">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="quick-sale-form">
+                <div class="form-group">
+                    <label for="sale-customer">Cliente</label>
+                    <select id="sale-customer" required>
+                        <option value="">Seleccionar cliente</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sale-product">Producto</label>
+                    <select id="sale-product" required>
+                        <option value="">Seleccionar producto</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sale-quantity">Cantidad</label>
+                        <input type="number" id="sale-quantity" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sale-price">Precio Unitario</label>
+                        <input type="number" id="sale-price" step="0.01" min="0" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="sale-total">Total</label>
+                    <input type="number" id="sale-total" step="0.01" min="0" readonly>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-quick-sale">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Registrar Venta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de ajuste de stock -->
+    <div class="modal" id="stock-adjustment-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ajuste Rápido de Stock</h2>
+                <button class="modal-close" id="close-stock-adjustment">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="stock-adjustment-form">
+                <div class="form-group">
+                    <label for="adjust-product">Producto</label>
+                    <select id="adjust-product" required>
+                        <option value="">Seleccionar producto</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="adjust-quantity">Cantidad a Ajustar</label>
+                    <input type="number" id="adjust-quantity" required>
+                    <small>Usa números positivos para agregar, negativos para quitar</small>
+                </div>
+                <div class="form-group">
+                    <label for="adjust-reason">Motivo</label>
+                    <select id="adjust-reason" required>
+                        <option value="">Seleccionar motivo</option>
+                        <option value="compra">Compra/Entrada</option>
+                        <option value="venta">Venta/Salida</option>
+                        <option value="devolucion">Devolución</option>
+                        <option value="merma">Merma/Pérdida</option>
+                        <option value="ajuste">Ajuste de Inventario</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-stock-adjustment">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Ajustar Stock</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sistema Inventario</h3>
+                    <p>Herramientas de gestión para empleados</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="customers.html">Clientes</a></li>
+                        <li><a href="inventory.html">Inventario</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <p>employee@sistemainventario.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sistema Inventario. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/employee.js"></script>
+</body>
+</html>
